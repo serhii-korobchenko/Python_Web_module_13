@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MY FINANCES</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <nav
+        style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px"
+      >
+        <ul>
+          <li><a href="/income/" role="button">Add Income</a></li>
+          <li><a href="/spending/" role="button">Add Spending</a></li>
+          <li><a href="/category/" role="button">Add Category</a></li>
+          <li><a href="/report/" role="button">Watch Report</a></li>
+        </ul>
+      </nav>
+
+      <h2> All my Incomes
+        {% for income in incomes%}
+        <ul>
+          <li>
+
+            <a href="/detail/{{income.id}}" role="button" class="outline">
+              <mark>{{income.summa}}</mark>
+            </a>
+
+          </li>
+        </ul>
+        {% endfor %}
+      </h2>
+
+      <h2> All my Spendings
+        {% for spending in spendings%}
+        <ul>
+          <li>
+
+            <a href="/detail/{{spending.id}}" role="button" class="outline">
+              <mark>{{spending.summa}}</mark>
+            </a>
+
+          </li>
+        </ul>
+        {% endfor %}
+      </h2>
+
+      <h2> All my Categories
+        {% for category in categories%}
+        <ul>
+          <li>
+
+            <a href="/detail/{{category.id}}" role="button" class="outline">
+              <mark>{{category.name}}</mark>
+            </a>
+
+          </li>
+        </ul>
+        {% endfor %}
+      </h2>
+
+    </main>
+  </body>
+</html>
