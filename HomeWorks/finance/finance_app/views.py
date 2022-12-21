@@ -38,12 +38,13 @@ def spending (request):
     if request.method == 'POST':
         summa = request.POST['summa']
         transaction_date = request.POST['transaction_date']
-        list_categories = request.POST.getlist('catigories')
+        list_categories = request.POST.getlist('categories')
         if summa and transaction_date:
             categories = Category.objects.filter(name__in=list_categories)
             spending = Spending.objects.create(summa=summa, transaction_date=transaction_date,)
             for category in categories.iterator():
                 spending.categories.add(category)
+                spending.save()
         return redirect(to='/')
 
     categories = Category.objects.all()
@@ -53,15 +54,12 @@ def detail_income(request, income_id):
     income = Income.objects.get(pk=income_id)
     income.category_list = ', '.join([str(name) for name in income.categories.all()])
 
-    return render(request, 'finance_app/detail_income.html', {"income": income, "income.category_list": income.category_list, })
+    return render(request, 'finance_app/detail_income.html', {"income": income,  })
 
 
-# def set_done(request, note_id):
-#     Note.objects.filter(pk=note_id).update(done=True)
-#     return redirect(to='/')
-#
-#
-# def delete_note(request, note_id):
-#     note = Note.objects.get(pk=note_id)
-#     note.delete()
-#     return redirect(to='/')
+def detail_spending(request, spending_id):
+    spending = Spending.objects.get(pk=spending_id)
+    spending.category_list = ', '.join([str(name) for name in spending.categories.all()])
+
+    return render(request, 'finance_app/detail_spending.html', {"spending": spending,  })
+

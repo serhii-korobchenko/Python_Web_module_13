@@ -12,7 +12,7 @@ class Category(models.Model):
 
 class Income(models.Model):
     summa = models.FloatField(max_length=50)
-    transaction_date = models.DateTimeField(auto_now_add=True)
+    transaction_date = models.DateTimeField(auto_now_add=False)
     categories = models.ManyToManyField(Category, through='IncomeToCategory')
 
 
@@ -21,7 +21,7 @@ class Income(models.Model):
 
 class Spending(models.Model):
     summa = models.FloatField(max_length=50)
-    transaction_date = models.DateTimeField(auto_now_add=True)
+    transaction_date = models.DateTimeField(auto_now_add=False)
     categories = models.ManyToManyField(Category, through='SpendingToCategory')
 
     def __str__(self):
