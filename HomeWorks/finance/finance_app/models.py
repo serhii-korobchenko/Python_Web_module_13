@@ -5,6 +5,7 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True, null=False)
 
+
     def __str__(self):
         return self.name
 
@@ -12,18 +13,19 @@ class Category(models.Model):
 class Income(models.Model):
     summa = models.FloatField(max_length=50)
     transaction_date = models.DateTimeField(auto_now_add=True)
-    catigories = models.ManyToManyField(Category, through='IncomeToCategory')
+    categories = models.ManyToManyField(Category, through='IncomeToCategory')
+
 
     def __str__(self):
-        return self.name
+        return str(self.summa)
 
 class Spending(models.Model):
     summa = models.FloatField(max_length=50)
     transaction_date = models.DateTimeField(auto_now_add=True)
-    catigories = models.ManyToManyField(Category, through='SpendingToCategory')
+    categories = models.ManyToManyField(Category, through='SpendingToCategory')
 
     def __str__(self):
-        return self.name
+        return str(self.summa)
 
 
 class IncomeToCategory(models.Model):

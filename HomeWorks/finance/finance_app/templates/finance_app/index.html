@@ -26,8 +26,9 @@
         <ul>
           <li>
 
-            <a href="/detail/{{income.id}}" role="button" class="outline">
-              <mark>{{income.summa}}</mark>
+            <a href="/detail_income/{{income.id}}" role="button" class="outline">
+              <mark>{{income.summa}} hrn., {{income.transaction_date}}</mark>
+
             </a>
 
           </li>
@@ -40,8 +41,8 @@
         <ul>
           <li>
 
-            <a href="/detail/{{spending.id}}" role="button" class="outline">
-              <mark>{{spending.summa}}</mark>
+            <a href="/detail_spending/{{spending.id}}" role="button" class="outline">
+              <mark>{{spending.summa}} hrn., {{spending.transaction_date}}</mark>
             </a>
 
           </li>
@@ -54,7 +55,7 @@
         <ul>
           <li>
 
-            <a href="/detail/{{category.id}}" role="button" class="outline">
+            <a href="/detail_category/{{category.id}}" role="button" class="outline">
               <mark>{{category.name}}</mark>
             </a>
 

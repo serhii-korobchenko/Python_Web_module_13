@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'finance_app',
+    'noteapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

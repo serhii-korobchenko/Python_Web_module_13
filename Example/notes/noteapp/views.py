@@ -34,7 +34,7 @@ def note(request):
 def detail(request, note_id):
     note = Note.objects.get(pk=note_id)
     note.tag_list = ', '.join([str(name) for name in note.tags.all()])
-    return render(request, 'finance_app/detail.html', {"note": note})
+    return render(request, 'finance_app/detail_income.html', {"note": note})
 
 
 def set_done(request, note_id):

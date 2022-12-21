@@ -22,23 +22,40 @@ def income (request):
     if request.method == 'POST':
         summa = request.POST['summa']
         transaction_date = request.POST['transaction_date']
-        list_categories = request.POST.getlist('catigories')
+        list_categories = request.POST.getlist('categories')
         if summa and transaction_date:
             categories = Category.objects.filter(name__in=list_categories)
-            income = Income.objects.create(summa=summa, transaction_date=transaction_date,)
+            income = Income.objects.create(summa=summa, transaction_date=transaction_date, )
             for category in categories.iterator():
                 income.categories.add(category)
+                income.save()
         return redirect(to='/')
 
     categories = Category.objects.all()
     return render(request, 'finance_app/income.html', {"categories": categories})
 
-# def detail(request, note_id):
-#     note = Note.objects.get(pk=note_id)
-#     note.tag_list = ', '.join([str(name) for name in note.tags.all()])
-#     return render(request, 'finance_app/detail.html', {"note": note})
-#
-#
+def spending (request):
+    if request.method == 'POST':
+        summa = request.POST['summa']
+        transaction_date = request.POST['transaction_date']
+        list_categories = request.POST.getlist('catigories')
+        if summa and transaction_date:
+            categories = Category.objects.filter(name__in=list_categories)
+            spending = Spending.objects.create(summa=summa, transaction_date=transaction_date,)
+            for category in categories.iterator():
+                spending.categories.add(category)
+        return redirect(to='/')
+
+    categories = Category.objects.all()
+    return render(request, 'finance_app/spending.html', {"categories": categories})
+
+def detail_income(request, income_id):
+    income = Income.objects.get(pk=income_id)
+    income.category_list = ', '.join([str(name) for name in income.categories.all()])
+
+    return render(request, 'finance_app/detail_income.html', {"income": income, "income.category_list": income.category_list, })
+
+
 # def set_done(request, note_id):
 #     Note.objects.filter(pk=note_id).update(done=True)
 #     return redirect(to='/')

@@ -5,7 +5,8 @@ urlpatterns = [
     path('', views.main, name='main'),
     path('category/', views.category, name='category'),
     path('income/', views.income, name='income'),
-    # path('detail/<int:note_id>', views.detail, name='detail'),
+    path('spending/', views.spending, name='spending'),
+    path('detail_income/<int:income_id>', views.detail_income, name='detail_income'),
     # path('done/<int:note_id>', views.set_done, name='set_done'),
     # path('delete/<int:note_id>', views.delete_note, name='delete_note'),
 ]
