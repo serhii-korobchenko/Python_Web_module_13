@@ -63,3 +63,13 @@ def detail_spending(request, spending_id):
 
     return render(request, 'finance_app/detail_spending.html', {"spending": spending,  })
 
+def delete_income(request, income_id):
+    income = Income.objects.get(pk=income_id)
+    income.delete()
+    return redirect(to='/')
+
+def delete_spending(request, spending_id):
+    spending = Spending.objects.get(pk=spending_id)
+    spending.delete()
+    return redirect(to='/')
+
