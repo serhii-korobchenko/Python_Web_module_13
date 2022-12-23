@@ -63,6 +63,11 @@ def detail_spending(request, spending_id):
 
     return render(request, 'finance_app/detail_spending.html', {"spending": spending,  })
 
+def detail_category(request, category_id):
+    category = Category.objects.get(pk=category_id)
+
+    return render(request, 'finance_app/detail_category.html', {"category": category,  })
+
 def delete_income(request, income_id):
     income = Income.objects.get(pk=income_id)
     income.delete()
@@ -73,3 +78,31 @@ def delete_spending(request, spending_id):
     spending.delete()
     return redirect(to='/')
 
+def delete_category(request, category_id):
+    category = Category.objects.get(pk=category_id)
+    category.delete()
+    return redirect(to='/')
+
+def report (request):
+
+    if request.method == 'POST':
+        sum_income = 0
+        sum_spending = 0
+        low_limit = request.POST['low_limit']
+        up_limit = request.POST['up_limit']
+
+        incomes_for_report = Income.objects.exclude(transaction_date__lt=low_limit).exclude(transaction_date__gt=up_limit)
+        spendings_for_report = Spending.objects.exclude(transaction_date__lt=low_limit).exclude(transaction_date__gt=up_limit)
+
+        for item in incomes_for_report:
+            sum_income = sum_income + item.summa
+
+        for item in spendings_for_report:
+            sum_spending = sum_spending + item.summa
+
+
+        return render(request, 'finance_app/report.html',{"incomes_for_report": incomes_for_report, "spendings_for_report": spendings_for_report, \
+                                                          "sum_income": sum_income,"sum_spending": sum_spending,})
+
+
+    return render(request, 'finance_app/report.html', {})
